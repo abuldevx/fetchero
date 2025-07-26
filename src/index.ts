@@ -1,7 +1,7 @@
 export { Fetchero } from './core';
 export { createFetchero, rest, gql } from './factories';
 
-// Export types for external use
+// eslint-disable-next-line prettier/prettier
 export type {
   FetcheroOptions,
   RestProxy,
