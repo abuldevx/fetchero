@@ -66,6 +66,7 @@ export class RestProxyFactory {
               url,
               method: prop.toUpperCase() as HttpMethod,
               data: options.body,
+              transformResponse: response => ({ data: JSON.parse(response) }),
               headers: {
                 ...this.headers,
                 ...ctx.headers,
