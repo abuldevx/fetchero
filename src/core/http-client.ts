@@ -32,6 +32,10 @@ export class HttpClient {
         throw new Error('Request URL is required');
       }
 
+      if (this.baseUrl && this.headers) {
+        // todo: will handle on next phase
+      }
+
       // Apply request interceptor
       const finalConfig = this.interceptors?.request
         ? await this.interceptors.request(config)
@@ -47,11 +51,8 @@ export class HttpClient {
         finalConfig
       );
 
-      console.log(this.baseUrl, this.headers);
-
       // Safely extract response data
-      const responseBody = result.data || {};
-      const { data: responseData, errors } = responseBody;
+      const { data: responseData, errors } = result.data || {};
 
       // Build response object
       const response: FetcherResponse<T> = {
