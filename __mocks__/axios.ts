@@ -1,4 +1,3 @@
-// __mocks__/axios.ts
 export default {
   get: jest.fn(() => Promise.resolve({ data: {} })),
   post: jest.fn(() => Promise.resolve({ data: {} })),
@@ -19,3 +18,15 @@ export default {
     response: { use: jest.fn(), eject: jest.fn() },
   },
 };
+
+export const createMockResponse = <T = any>(
+  data: T,
+  status = 200,
+  statusText = 'OK'
+) => ({
+  data: { data },
+  status,
+  statusText,
+  headers: {},
+  config: {},
+});
