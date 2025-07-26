@@ -1,103 +1,323 @@
-# TSDX User Guide
+# **Fetchero**
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+_A type-safe, proxy-based HTTP & GraphQL client for modern applications._
 
-> This TSDX setup is meant for developing libraries (not apps!) that can be published to NPM. If you’re looking to build a Node app, you could use `ts-node-dev`, plain `ts-node`, or simple `tsc`.
+`fetchero` is a lightweight, flexible, and highly intuitive library for making **REST** and **GraphQL** requests.  
+It uses **Proxies** for a **chainable API**, **interceptors** for pre/post-processing, and **enhanced error handling** for safer, predictable responses.
 
-> If you’re new to TypeScript, checkout [this handy cheatsheet](https://devhints.io/typescript)
+Whether you're consuming REST APIs or working with GraphQL backends, Fetchero simplifies the process with a **declarative, fluent syntax** that feels natural and reduces boilerplate.
 
-## Commands
+---
 
-TSDX scaffolds your new library inside `/src`.
+## **Table of Contents**
 
-To run TSDX, use:
+1.  [Features](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#features)
+
+2.  [Installation](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#installation)
+
+3.  [Basic Usage](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#basic-usage)
+
+    - [Create an instance](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#create-an-instance)
+
+    - [REST & GraphQL as standalone clients](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#or-individually)
+
+4.  [REST Client](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#rest-client)
+
+    - [Making requests](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#making-requests)
+
+    - [Dynamic path segments](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#dynamic-path-segments)
+
+    - [Override base URL or headers](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#override-base-url-or-headers)
+
+5.  [GraphQL Client](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#graphql-client)
+
+    - [Queries](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#queries)
+
+    - [Mutations](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#mutations)
+
+    - [Subscriptions](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#subscriptions)
+
+    - [Override base URL & headers](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#override-base-url--headers)
+
+6.  [Interceptors](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#interceptors)
+
+7.  [Error Handling](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#error-handling)
+
+8.  [Response Shape](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#response-shape)
+
+9.  [Examples](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#examples)
+
+10. [TypeScript Support](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#typescript-support)
+
+11. [API Overview](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#api-overview)
+
+12. [Why Fetchero?](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#why-fetchero)
+
+---
+
+## **Features**
+
+- **Proxy-based REST client** — Build endpoints dynamically using dot-chaining and path arguments. No manual string concatenation.
+
+- **GraphQL client with query builder** — Write GraphQL queries fluently, with support for variables and field selection.
+
+- **Base URL & dynamic headers** — Override base URLs and headers globally or per-request.
+
+- **Interceptors** — Hook into requests and responses for logging, authentication, and transformation.
+
+- **Error handling** — Standardized error objects with meaningful messages and GraphQL error normalization.
+
+- **Fully TypeScript ready** — Get autocompletion and type safety for your API calls.
+
+---
+
+## **Installation**
 
 ```bash
-npm start # or yarn start
+npm install fetchero
+
 ```
 
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
+or
 
-To do a one-off build, use `npm run build` or `yarn build`.
+```bash
+yarn add fetchero
 
-To run tests, use `npm test` or `yarn test`.
-
-## Configuration
-
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
-
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`.
-
-### Bundle Analysis
-
-[`size-limit`](https://github.com/ai/size-limit) is set up to calculate the real cost of your library with `npm run size` and visualize the bundle with `npm run analyze`.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```txt
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
 ```
 
-### Rollup
+---
 
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
+## **Basic Usage**
 
-### TypeScript
+### **Create an instance**
 
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
+```ts
+import { createFetchero } from 'fetchero';
 
-## Continuous Integration
+const api = createFetchero({
+  baseUrl: 'https://api.example.com',
+  headers: { Authorization: 'Bearer token' },
+});
+```
 
-### GitHub Actions
+### **Or individually**
 
-Two actions are added by default:
+If you only need one client type (REST or GraphQL):
 
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
-- `size` which comments cost comparison of your library on every pull request using [`size-limit`](https://github.com/ai/size-limit)
+```ts
+import { rest, gql } from 'fetchero';
+const restClient = rest({ baseUrl: '...' });
+const gqlClient = gql({ baseUrl: '...' });
+```
 
-## Optimizations
+---
 
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
+## **REST Client**
 
-```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
+### **Making requests**
 
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
+```ts
+// GET /users
+const res = await api.rest.users.get();
+
+// GET /users/123
+const res = await api.rest.users(123).get();
+
+// GET /users/123?active=true
+const res = await api.rest.users(123).get({ query: { active: true } });
+
+// POST /users with body
+const res = await api.rest.users.post({ body: { name: 'John' } });
+```
+
+### **Dynamic path segments**
+
+```ts
+// GET /users/123/posts/456
+const res = await api.rest
+  .users(123)
+  .posts(456)
+  .get();
+```
+
+### **Override base URL or headers**
+
+```ts
+// Different base URL
+await api.rest.users.base('https://another-api.com').get();
+
+// Add/override headers
+await api.rest.users.headers({ Authorization: 'Bearer new-token' }).get();
+```
+
+---
+
+## **GraphQL Client**
+
+Fetchero provides a **fluent query builder** for GraphQL.
+
+### **Queries**
+
+```ts
+// Basic query
+const res = await api.gql.query.getUser({ id: 123 }).select('id name email');
+```
+
+This builds and executes:
+
+```graphql
+query {
+  getUser(id: 123) {
+    id
+    name
+    email
+  }
 }
 ```
 
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
+### **Mutations**
 
-## Module Formats
+```ts
+const res = await api.gql.mutation
+  .createUser({ name: 'John' })
+  .select('id name');
+```
 
-CJS, ESModules, and UMD module formats are supported.
+### **Subscriptions**
 
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
+```ts
+const res = await api.gql.subscription
+  .onMessage({ roomId: 1 })
+  .select('id content');
+```
 
-## Named Exports
+### **Override base URL & headers**
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
+```ts
+await api.gql.query
+  .getUser({ id: 123 })
+  .base('https://graphql.alt.com')
+  .headers({ Authorization: 'Bearer new' })
+  .select('id name');
+```
 
-## Including Styles
+---
 
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
+## **Interceptors**
 
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
+Intercept and modify **requests** and **responses** globally.
 
-## Publishing to NPM
+```ts
+import { createFetchero } from 'fetchero';
 
-We recommend using [np](https://github.com/sindresorhus/np).
+const api = createFetchero({
+  baseUrl: 'https://api.example.com',
+  interceptors: {
+    request: async config => {
+      console.log('Outgoing Request:', config);
+      return config;
+    },
+    response: async response => {
+      console.log('Incoming Response:', response.data);
+      return response.data;
+    },
+  },
+});
+```
+
+---
+
+## **Error Handling**
+
+All errors are standardized:
+
+```ts
+const res = await api.rest.users(999).get();
+
+if (res.errors) {
+  console.log(res.errors[0].extensions.message); // "Not Found"
+}
+```
+
+GraphQL errors are automatically normalized using `errorCompose`.
+
+---
+
+## **Response Shape**
+
+Every request returns:
+
+```ts
+interface FetcherResponse<T> {
+  data: T | null;
+  errors?: Array<{
+    message?: string;
+    extensions: { code?: string; message?: string };
+  }>;
+}
+```
+
+---
+
+## **Examples**
+
+### **Chained REST call with query & headers**
+
+```ts
+await api.rest
+  .users(42)
+  .headers({ 'X-Custom': 'yes' })
+  .posts.get({ query: { page: 2 } });
+```
+
+### **GraphQL query with variables**
+
+```ts
+await api.gql.query
+  .searchUsers({ name: { type: 'String!', value: 'John' } })
+  .select('id name email');
+```
+
+---
+
+## **TypeScript Support**
+
+Type definitions are included out of the box for:
+
+- REST responses
+
+- GraphQL queries/mutations
+
+- Errors & interceptors
+
+---
+
+## **API Overview**
+
+### **REST**
+
+- `api.rest[resource]` — Chainable resource paths
+
+- Methods: `.get()`, `.post()`, `.put()`, `.patch()`, `.delete()`
+
+- Modifiers: `.base(url)`, `.headers({ ... })`
+
+### **GraphQL**
+
+- `api.gql.query.field(args).select(fields)`
+
+- Operations: `query`, `mutation`, `subscription`
+
+- Modifiers: `.base(url)`, `.headers({ ... })`
+
+---
+
+## **Why Fetchero?**
+
+- No need to manually build URLs or queries.
+
+- Fluent, chainable API.
+
+- Works equally well for REST & GraphQL.
+
+- Easy integration with TypeScript & interceptors.
