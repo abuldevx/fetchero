@@ -93,6 +93,7 @@ describe('RestProxyFactory', () => {
           url: 'https://api.example.com/users',
           method: 'GET',
           data: undefined,
+          transformResponse: expect.anything(),
           headers: { 'Content-Type': 'application/json' },
         });
       });
@@ -108,6 +109,7 @@ describe('RestProxyFactory', () => {
           method: 'POST',
           data: { name: 'John', email: 'john@example.com' },
           headers: { 'Content-Type': 'application/json' },
+          transformResponse: expect.anything(),
         });
       });
 
@@ -119,6 +121,7 @@ describe('RestProxyFactory', () => {
           url: 'https://api.example.com/users/123',
           method: 'PUT',
           data: { name: 'Jane' },
+          transformResponse: expect.anything(),
           headers: { 'Content-Type': 'application/json' },
         });
       });
@@ -131,6 +134,7 @@ describe('RestProxyFactory', () => {
           url: 'https://api.example.com/users/123',
           method: 'PATCH',
           data: { email: 'new@example.com' },
+          transformResponse: expect.anything(),
           headers: { 'Content-Type': 'application/json' },
         });
       });
@@ -143,6 +147,7 @@ describe('RestProxyFactory', () => {
           url: 'https://api.example.com/users/123',
           method: 'DELETE',
           data: undefined,
+          transformResponse: expect.anything(),
           headers: { 'Content-Type': 'application/json' },
         });
       });
@@ -157,6 +162,7 @@ describe('RestProxyFactory', () => {
           url: 'https://api.example.com/users?page=1&limit=10&active=true',
           method: 'GET',
           data: undefined,
+          transformResponse: expect.anything(),
           headers: { 'Content-Type': 'application/json' },
         });
       });
@@ -171,6 +177,7 @@ describe('RestProxyFactory', () => {
           url: 'https://api.example.com/users',
           method: 'GET',
           data: undefined,
+          transformResponse: expect.anything(),
           headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer token',
@@ -190,6 +197,7 @@ describe('RestProxyFactory', () => {
           url: 'https://api.example.com/users',
           method: 'GET',
           data: undefined,
+          transformResponse: expect.anything(),
           headers: {
             'Content-Type': 'application/json',
             'X-Custom': 'value',
@@ -208,6 +216,7 @@ describe('RestProxyFactory', () => {
           url: 'https://api2.example.com/users',
           method: 'GET',
           data: undefined,
+          transformResponse: expect.anything(),
           headers: { 'Content-Type': 'application/json' },
         });
       });
@@ -220,6 +229,7 @@ describe('RestProxyFactory', () => {
           url: 'https://api.example.com/users',
           method: 'GET',
           data: undefined,
+          transformResponse: expect.anything(),
           headers: { 'Content-Type': 'application/json' },
         });
       });

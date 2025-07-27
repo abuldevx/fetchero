@@ -1,5 +1,5 @@
 import { createFetchero } from '../../../src/index';
-import { buildQuery } from '@getanwar/graphql-query-builder';
+import { buildQuery } from '../../../src/utils/build-query';
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 const createMockResponse = <T = any>(
@@ -41,7 +41,7 @@ jest.mock('axios', () => ({
   __esModule: true,
   default: jest.fn(async () => {}),
 }));
-jest.mock('@getanwar/graphql-query-builder');
+jest.mock('../../../src/utils/build-query');
 
 const mockAxiosFunction = axios as jest.MockedFunction<typeof axios>;
 const mockBuildQuery = buildQuery as jest.MockedFunction<typeof buildQuery>;

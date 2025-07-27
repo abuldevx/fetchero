@@ -1,8 +1,8 @@
 import { HttpClient } from '../../../src/core';
 import { GraphQLProxyFactory } from '../../../src/proxies';
-import { buildQuery } from '@getanwar/graphql-query-builder';
+import { buildQuery } from '../../../src/utils/build-query';
 
-jest.mock('@getanwar/graphql-query-builder');
+jest.mock('../../../src/utils/build-query');
 const mockBuildQuery = buildQuery as jest.MockedFunction<typeof buildQuery>;
 
 describe('GraphQLProxyFactory', () => {
