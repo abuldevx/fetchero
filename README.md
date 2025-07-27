@@ -11,47 +11,27 @@ Whether you're consuming REST APIs or working with GraphQL backends, Fetchero si
 
 ## **Table of Contents**
 
-1.  [Features](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#features)
-
-2.  [Installation](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#installation)
-
-3.  [Basic Usage](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#basic-usage)
-
-    - [Create an instance](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#create-an-instance)
-
-    - [REST & GraphQL as standalone clients](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#or-individually)
-
-4.  [REST Client](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#rest-client)
-
-    - [Making requests](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#making-requests)
-
-    - [Dynamic path segments](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#dynamic-path-segments)
-
-    - [Override base URL or headers](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#override-base-url-or-headers)
-
-5.  [GraphQL Client](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#graphql-client)
-
-    - [Queries](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#queries)
-
-    - [Mutations](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#mutations)
-
-    - [Subscriptions](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#subscriptions)
-
-    - [Override base URL & headers](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#override-base-url--headers)
-
-6.  [Interceptors](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#interceptors)
-
-7.  [Error Handling](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#error-handling)
-
-8.  [Response Shape](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#response-shape)
-
-9.  [Examples](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#examples)
-
-10. [TypeScript Support](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#typescript-support)
-
-11. [API Overview](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#api-overview)
-
-12. [Why Fetchero?](https://chatgpt.com/c/6875f925-1c40-800b-ab53-7a47568a65d8#why-fetchero)
+1.  [Features](#features)
+2.  [Installation](#installation)
+3.  [Basic Usage](#basic-usage)
+    - [Create an instance](#create-an-instance)
+    - [REST & GraphQL as standalone clients](#or-individually)
+4.  [REST Client](#rest-client)
+    - [Making requests](#making-requests)
+    - [Dynamic path segments](#dynamic-path-segments)
+    - [Override base URL or headers](#override-base-url-or-headers)
+5.  [GraphQL Client](#graphql-client)
+    - [Queries](#queries)
+    - [Mutations](#mutations)
+    - [Subscriptions](#subscriptions)
+    - [Override base URL & headers](#override-base-url--headers)
+6.  [Interceptors](#interceptors)
+7.  [Error Handling](#error-handling)
+8.  [Response Shape](#response-shape)
+9.  [Examples](#examples)
+10. [TypeScript Support](#typescript-support)
+11. [API Overview](#api-overview)
+12. [Why Fetchero?](#why-fetchero)
 
 ---
 
