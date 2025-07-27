@@ -191,6 +191,85 @@ const res = await api.gql.subscription
   .select('id content');
 ```
 
+---
+
+### **Passing Arguments & Variables**
+
+Fetchero automatically converts JS objects into **typed GraphQL variables**.
+
+#### **Plain Arguments (Auto-inferred types)**
+
+```ts
+await api.gql.query.getUser({ id: 1 }).select('id name');
+```
+
+**Builds:**
+
+```graphql
+query my_query($id_0: Int) {
+  getUser(id: $id_0) {
+    id
+    name
+  }
+}
+```
+
+#### **Custom Types**
+
+Wrap values in `{ value, type }` to define the GraphQL type explicitly:
+
+```ts
+await api.gql.query
+  .getUser({ id: 1, status: { value: 'ACTIVE', type: 'StatusEnum!' } })
+  .select('id name status');
+```
+
+**Builds:**
+
+```graphql
+query my_query($id_0: Int, $status_0: StatusEnum!) {
+  getUser(id: $id_0, status: $status_0) {
+    id
+    name
+    status
+  }
+}
+```
+
+#### **Nested Input Objects**
+
+You can pass complex input types like this:
+
+```ts
+await api.gql.mutation.updateUser({
+  id: 1,
+  profile: {
+    type: 'UserProfileInput',
+    value: { age: 30, email: 'john@example.com' },
+  },
+});
+```
+
+**Builds:**
+
+```graphql
+mutation my_mutation($id_0: Int, $profile_0: UserProfileInput) {
+  updateUser(id: $id_0, profile: $profile_0)
+}
+```
+
+#### **Rules for Arguments**
+
+- **Plain values** → Auto-inferred type (`Int`, `String`, `Float`).
+
+- **`{ value, type }`** → Explicit GraphQL type.
+
+- **Nested objects** → Use `{ type: 'MyInputType', value: { ... } }`.
+
+- **Invalid values (arrays, functions, etc.)** → Throw an error.
+
+---
+
 ### **Override base URL & headers**
 
 ```ts
