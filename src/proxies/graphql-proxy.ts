@@ -1,4 +1,3 @@
-import { buildQuery } from '@getanwar/graphql-query-builder';
 import {
   GraphQLProxy,
   GraphQLOperationProxy,
@@ -10,6 +9,7 @@ import {
 } from '../types';
 import { Validators } from '../utils';
 import { HttpClient } from '../core/http-client';
+import { buildQuery } from '../utils/build-query';
 
 /**
  * GraphQL proxy implementation with enhanced error handling
