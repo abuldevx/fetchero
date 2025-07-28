@@ -6,9 +6,7 @@ export interface GraphQLArgs {
   [key: string]: { type: string; value: unknown } | any;
 }
 
-export interface GraphQLResponse<T = unknown> extends FetcherResponse<T> {
-  extensions?: Record<string, unknown>;
-}
+export type GraphQLResponse<T = unknown> = FetcherResponse<T>;
 
 export interface GraphQLQueryBuilder<T = unknown> {
   select(fields: string): Promise<GraphQLResponse<T>>;

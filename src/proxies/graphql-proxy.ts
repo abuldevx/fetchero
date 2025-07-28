@@ -178,12 +178,14 @@ export class GraphQLProxyFactory {
         throw new Error('Field name must be a non-empty string');
       }
 
-      const cleanedSelection = selection?.trim() || 'id';
+      const cleanedSelection = selection?.trim();
       const hasArgs = argsObj && Object.keys(argsObj).length > 0;
 
+      const select = cleanedSelection ? `{ ${cleanedSelection} }` : '';
+
       const templateParts = hasArgs
-        ? [`${operation} { ${field} (`, `) { ${cleanedSelection} } }`]
-        : [`${operation} { ${field} `, ` { ${cleanedSelection} } }`];
+        ? [`${operation} { ${field} (`, `) ${select} }`]
+        : [`${operation} { ${field} `, ` ${select} }`];
 
       const result = buildQuery(templateParts, argsObj || {});
 

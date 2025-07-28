@@ -99,7 +99,7 @@ describe('GraphQLProxyFactory', () => {
         await proxy.query.user.execute();
 
         expect(mockBuildQuery).toHaveBeenCalledWith(
-          ['query { user ', ' { id } }'],
+          ['query { user ', '  }'],
           {}
         );
         expect(mockHttpClient.makeRequest).toHaveBeenCalled();
@@ -168,7 +168,7 @@ describe('GraphQLProxyFactory', () => {
       it('should handle arguments', async () => {
         const proxy = factory.createProxy({});
         const queryBuilder = proxy.query.user({ id: 123 });
-        await queryBuilder.execute();
+        await queryBuilder.select('id');
 
         expect(mockBuildQuery).toHaveBeenCalledWith(
           ['query { user (', ') { id } }'],
@@ -184,7 +184,7 @@ describe('GraphQLProxyFactory', () => {
           active: true,
         };
         const queryBuilder = proxy.query.user(args);
-        await queryBuilder.execute();
+        await queryBuilder.select('id');
 
         expect(mockBuildQuery).toHaveBeenCalledWith(
           ['query { user (', ') { id } }'],
@@ -204,7 +204,7 @@ describe('GraphQLProxyFactory', () => {
         await proxy.query.user.execute();
 
         expect(mockBuildQuery).toHaveBeenCalledWith(
-          ['query { user ', ' { id } }'],
+          ['query { user ', '  }'],
           {}
         );
       });
@@ -259,7 +259,7 @@ describe('GraphQLProxyFactory', () => {
         });
 
         const proxy = factory.createProxy({});
-        await proxy.mutation.createUser({ name: 'John' }).execute();
+        await proxy.mutation.createUser({ name: 'John' }).select('id');
 
         expect(mockBuildQuery).toHaveBeenCalledWith(
           ['mutation { createUser (', ') { id } }'],
@@ -278,7 +278,7 @@ describe('GraphQLProxyFactory', () => {
         await proxy.subscription.userUpdated.execute();
 
         expect(mockBuildQuery).toHaveBeenCalledWith(
-          ['subscription { userUpdated ', ' { id } }'],
+          ['subscription { userUpdated ', '  }'],
           {}
         );
       });

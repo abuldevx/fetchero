@@ -147,7 +147,7 @@ describe('GraphQL API Integration', () => {
       };
       mockAxiosFunction.mockResolvedValue(createMockResponse(responseData));
 
-      await fetchero.gql.mutation.createUser({ name: 'John' }).execute();
+      await fetchero.gql.mutation.createUser({ name: 'John' }).select('id');
 
       expect(mockBuildQuery).toHaveBeenCalledWith(
         expect.arrayContaining(['mutation { createUser (', ') { id } }']),
@@ -171,7 +171,7 @@ describe('GraphQL API Integration', () => {
       await fetchero.gql.subscription.userUpdated.execute();
 
       expect(mockBuildQuery).toHaveBeenCalledWith(
-        expect.arrayContaining(['subscription { userUpdated ', ' { id } }']),
+        expect.arrayContaining(['subscription { userUpdated ', '  }']),
         {}
       );
     });

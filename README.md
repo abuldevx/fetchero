@@ -120,6 +120,21 @@ const res = await api.rest
   .get();
 ```
 
+### **Or you may like short syntax**
+
+```ts
+// GET /users
+const res = await api.rest('users').get();
+
+// GET /users/123
+const res = await api.rest('users', 123).get();
+
+// POST /users/123/posts/456
+const res = await api
+  .rest('users', 123, 'posts', 345)
+  .post({ body: { name: 'John' } });
+```
+
 ### **Override base URL or headers**
 
 ```ts
